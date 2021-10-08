@@ -1,0 +1,11 @@
+function velocity = pix_to_vel(pix)
+    % pix= envelope that's extracted from images
+    pix = squeeze(squeeze(pix));
+    crop_height = 784;
+    prf = 3000;
+    orig_im_height = 784;
+    crop_resize = 784;
+    limits = linspace(-prf/2, prf/2, prf+1);
+    freq_per_pix = length(limits)/orig_im_height;
+    freq = limits(floor(pix /crop_resize*crop_height / crop_height*orig_im_height * freq_per_pix)+1);
+    velocity = -1*(3*10^8*freq/2/(77*10^9));

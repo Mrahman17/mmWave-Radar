@@ -1,0 +1,51 @@
+clear; clc; close all; warning off;
+act={'Ali Gurbuz 24 Oct','Emre 24 Oct ','Mahbub 24 Oct '};
+%for m=1%:length(act)
+DATA_DIR='/media/rspl-admin/Seagate Backup Plus Drive/Mahbub/Debud chirp loops/';
+%DATA_DIR=strcat(DATA_DIR1,act{m},'/Front 77/');
+OUT_DIR1 = '/media/rspl-admin/Seagate Backup Plus Drive/Mahbub/Debud chirp loops/Spectrogram_oct/';   
+OUT_DIR=strcat(OUT_DIR1,act{m},'/');
+%OUT_DIR = '/mnt/HDD02/WGAN/old_backup/Villanova/spectrogram/Ben/';     % ** Adjust acc to your pattern**
+% DATA_DIR = 'C:\Users\mrahman17\Desktop\Genetic Algorithm\Activity_Recognition_data\05_Walking_Towards_radar\';           % ** Adjust acc to your pattern**
+ if 2~=exist(OUT_DIR,'dir')
+                mkdir(OUT_DIR);
+ end
+pattern = strcat(DATA_DIR, '*.bin');    % file pattern
+files = dir(pattern);
+
+% w = waitbar(0);
+
+I_MAX = numel(files); % # of files in "files"
+
+for i = 1:I_MAX   % for the first 20 iteration
+        tic
+        msg = strcat(['Processing file ', int2str(i), ' of ', int2str(I_MAX)]);   % loading message
+        %     waitbar(i/I_MAX, w, msg);
+        disp(msg);
+        fName = files(i).name;
+        [foo1, name, foo2] = fileparts(fName);
+        fIn = fullfile(files(i).folder, files(i).name);
+        fOut = strcat(OUT_DIR, name, '.png');
+        fOut_vid = strcat(OUT_DIR, name, '.avi');
+        %     datToImage_Anchortek_No_MTI(fIn, fOut, fName);
+        %     datToImageV1( fIn, fOut, fName )
+        %     datToImage_77( fIn, fOut, fName );
+        %     datToImage_matrix(fIn, fOut, fName );
+        %     datToImage_77_MTI( fIn, fOut, fName );
+        %     rangeDoppler_Anchortech(fIn, fOut_vid, fName);
+        %     debug_CVD(fIn, fOut, fName);
+        %     Xethru_spec(fIn, fOut, fName);
+        %     rangeDopp_Video(fIn, fOut_vid, fName);
+        %     range_Dopp_apart(fIn, fOut_vid, fName);
+        %     optical_flow_auto(fIn, fOut, fName);
+        %     PSD_auto(fIn, fOut, fName);
+        %     vel_est_77(fIn, fOut, fName);
+        %     opt_flow_velocity(fIn, fOut, fName);
+        %     opticalFlow_77_20sec(fIn, fOut, fName);
+        %     rangeDopp_AWR1642(fIn, fOut_vid)
+        %microDoppler_AWR1642_imitation(fIn, fOut)
+        microDoppler_AWR1642_imitation(fIn, fOut)
+        toc
+end
+%end
+% close(w);

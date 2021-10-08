@@ -1,0 +1,10 @@
+clc; clear all; close all;
+fIn='C:\Users\uarspl\Desktop\77ghz_data_Jan_28\output_DR_Martelli\full_fig_n.png';
+img_matrix = im2double(rgb2gray(imread(fIn)));
+img_matrix(img_matrix<0.0589) = 0;
+total_pow = sum(img_matrix);
+upper_lim = 0.90*total_pow;
+central_lim = 0.5*total_pow;
+lower_lim = 0.03*total_pow;
+new_env=find_central_env(img_matrix,central_lim);
+figure; imshow(imread(fIn));hold on; plot(1*(new_env),'m','LineWidth',2);
